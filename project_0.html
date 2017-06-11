@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang = "ko">
+	<head>
+		<meta charset="utf-8">
+		<title>HYUNSTAGRAM</title>
+		<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	</head>
+	<body onload="responsive();" onresize="responsive();">
+		<div id="topbanner">
+			<h1 style="font-style: italic;">HYUNSTAGRAM</h1>
+			<img src="">
+		</div>
+
+		<div id="pagebody">
+			<div id="loginbox">
+
+				<div id="idbox">
+					<input type="text" name="" placeholder="아이디" id="id" class="loginindex">
+				</div>
+
+				<div id="loginbtn">
+					<input type="button" name="로그인" value="로그인" id="button" class="loginindex" onclick="trylogin();">
+				</div>	
+
+				<div id="pwbox">
+					<input type="password" name="" class="loginindex" placeholder="비밀번호" id="pw">
+				</div>
+
+			</div>
+
+			<div id="diary">
+
+				<div id="addingbox">
+
+					<div id="username">
+					</div>
+
+					<div id="diarytitle">
+						<input id="diarytitle_input" type="text" name="제목" placeholder="제목" class="write">	
+					</div>
+				
+					<div id="diarytext">
+						<textarea id="diarytext_input" class = "write" rows="3" placeholder="다이어리 내용을 입력하세요"></textarea>
+					</div>
+
+					<div id="attachments">
+						<input type="file" id = "attachments_input" style="" name="vkdl">
+					</div>
+					
+					<div id="date">
+						<input type="date" id="date_input" name="">
+					</div>
+
+					<div id="hashtag">
+						<input id="tag_1" type="text" placeholder="해쉬태그 입력 (1)">
+						<input id = "add" type="button" value="+" onclick="addhashtag();">
+					</div>
+					
+					<div id="submit">
+						<input type="button"  value="submit" onclick="save();">
+					</div>
+				</div>
+
+				<div id="searchtag">
+					<input type="text" placeholder="search">
+					<input type="button" onclick="">
+				</div>
+
+				<div id="writtendiary">
+
+					
+				</div>
+			</div>
+		</div>
+
+	</body>
+	<style>
+	*{
+		margin: 0;
+		padding: 0;
+
+	}
+	
+	div#topbanner{
+		background-repeat: no-repeat;
+		background-position: center;
+			background-image: url("banner1.jpeg");
+			height: 100px;
+			box-sizing: border-box;
+			text-align: center;
+			width: 100%;
+	}
+	div#loginbox{
+		
+		padding: 10px;
+		background-color: rgb(234,234,234);
+		float: right;
+		
+		height: 40px;
+	}
+	div#idbox{
+		width: 50%;
+		float: left;
+	}
+	div#pwbox{
+		width: 50%;
+		float: left;
+	}
+	div#loginbtn{
+		float: left;
+		width: 50%;
+
+	}
+	input#id{
+		width: 80%;
+		
+	}
+	input#pw{
+		width: 80%;
+	}
+	input#button{
+		box-sizing: border-box;
+		border: 1px solid black;
+		width: 100%;
+		height:100%;
+		background-color: white;
+	}
+	div#pagebody{
+		background-color: #ffffcc;
+		width: 100%;
+		height: 100%;
+
+	}
+	div#diary{
+		display: none;
+		
+	}
+	div#addingbox{
+		
+		padding-left:50px;
+		padding-right: 50px;
+	}
+	div#diarytitle{
+		width: 50%;
+		margin: 0;
+		float: left;
+	}
+	div#attachments{
+		width: 50%;
+		float: left;
+		
+	}
+	div#date{
+		width: 50%;
+		float: left;
+		
+	}
+
+	.write{
+		margin: 0 auto;
+	}
+
+	.pastdiary{
+		margin: 0;
+		padding: 10px;
+		float: left;
+		width: 40%;
+		background-color: rgb(134,229,127);
+		border: 1px solid rgb(255,167,167);
+	}
+
+	</style>
+	<script >
+	//반응형 구현
+	function responsive() {
+		var width = window.innerWidth;
+		var loginboxwidth = document.getElementById("loginbox");
+		var addingboxwidth = document.getElementById("addingbox");
+		var textarea = document.getElementById("diarytext_input");
+		
+		var diary_posted = document.getElementById("writtendiary");
+		if(width < 600){
+			
+			loginboxwidth.style.width = "80%";
+			loginboxwidth.style.float="none";
+			loginboxwidth.style.margin="0 auto";
+
+			textarea.setAttribute("cols",width/8);//내용입력창 반응성
+
+	
+			
+
+		}
+		else{
+			loginboxwidth.style.width = "20%";
+			loginbox.style.float="right";
+			loginboxwidth.style.margin="10px";
+			textarea.setAttribute("cols",width/10);
+			addingboxwidth.style.width="100%";
+
+			
+		}
+
+	
+	}
+	//로그인 
+
+		//버튼 구현
+
+		var btn = document.getElementById("button");
+		btn.onmouseover = function(){
+			btn.style.backgroundColor="red";
+		}
+		btn.onmouseout = function() {
+			btn.style.backgroundColor = "white";
+		}
+		
+
+		//로그인 시도
+
+		function trylogin(){
+
+		var inputid = document.getElementById("id").value;
+		var inputpw = document.getElementById("pw").value;
+		if(inputid.length==0){
+			alert("LOGIN DENIED");
+		}
+		else if((inputid=="fous")&&(inputpw=="1111")){
+			alert("LOGIN SUCCESS");
+			var begindiary = document.getElementById("diary");
+			begindiary.style.display= "inline";
+		}
+		else if((inputid=="konkuk")&&(inputpw=="1111")){
+			alert("LOGIN SUCCESS");
+			var begindiary = document.getElementById("diary");
+			begindiary.style.display= "inline";
+		}
+		else if((inputid=="korea")&&(inputpw="1111")){
+			alert("LOGIN SUCCESS");
+			var begindiary = document.getElementById("diary");
+			begindiary.style.display= "inline";
+		}
+		else if((inputid=="teacher")&&(inputpw=="11111")){
+			alert("LOGIN SUCCESS");
+			var begindiary = document.getElementById("diary");
+			begindiary.style.display= "inline";
+		}
+		else if((inputid=="student")&&(inputpw=="1111")){
+			alert("LOGIN SUCCESS");
+			var begindiary = document.getElementById("diary");
+			begindiary.style.display= "inline";
+		}
+		else{
+			alert("LOGIN DENIED");
+		}
+
+
+
+
+		
+
+		//입력창 사용자 이름
+		 var username = document.getElementById("username");
+
+		 username.innerHTML= "사용자 : " + inputid 
+		 username.style.width="50%";
+		 username.style.margin = "0";
+		 username.style.float = "left";
+		}
+		
+		//다이어리 입력창 구현
+		var count = 1
+		function addhashtag(){
+			
+			var newhashtag = document.createElement("input");
+			var hashtag = document.getElementById("hashtag")
+			var addtag = document.getElementById("add");
+			newhashtag.setAttribute("id","tag_"+(count+1));
+			newhashtag.setAttribute("type","text");
+			newhashtag.setAttribute("placeholder","해쉬태그 입력 ("+(count+1)+")")
+			hashtag.appendChild(newhashtag);
+			hashtag.insertBefore(newhashtag,addtag);
+			count++;
+		}
+		
+		//다이어리 저장
+			var num = 0;
+		function save(){
+			
+
+			var diarytitle = document.getElementById("diarytitle_input").value;
+			var diarytext = document.getElementById("diarytext_input").value;
+			var diarydate = document.getElementById("date_input").value;
+			var diaryattachment = document.getElementById("attachments_input").value;
+			var diaryhashtag = document.getElementsByClassName("tags").value;
+			alert("내용: " +diarytitle+ diarytext+diarydate);
+			
+			var param = {
+				"날짜" : diarydate,
+				"제목" : diarytitle,
+				"내용" : diarytext,
+				"해시태그"	 : diaryhashtag		
+			};
+
+					
+			$.ajax({
+				url: "https://hyunstagram-8439b.firebaseio.com/Diary/"+diarydate+".json",
+				method : "PUT",
+				data: JSON.stringify(param),
+				success : function(data){
+					keycode = printObj(data);
+					var writtendiary = document.getElementById("writtendiary");
+					var diary_post = document.createElement("div");
+					var deletebutton = document.createElement("input");
+					deletebutton.setAttribute("type","button");
+					deletebutton.setAttribute("value","삭제");
+					deletebutton.setAttribute("onclick","deletepost(diary_post);");
+					function deletepost(div) {
+						this.style.display = "none";
+					}
+
+						
+					diary_post.appendChild(deletebutton);
+
+					/*
+					var fix_or_delete = document.createElement("div");
+					fix_or_delete.appendChild(fixbutton);
+					fix_or_delete.appendChild(deletebutton);
+
+						var fixbutton = document.createElement("input");
+						fixbutton.setAttribute("type","button");
+						fixbutton.setAttribute("value","수정");
+						fixbutton.setAttribute("onclick","fix();");
+
+						function fix(){
+							var changeobj = document.createElement("select");
+							changeobj.setAttribute("onchange","dateis();");
+
+							function dateis(){
+								if(changeobj.value==changedate){
+									var fixdateto = document.createElement("input");
+									fixdateto.setAttribute("type","date");
+								}
+
+							}
+
+							var changetitle = document.createElement("option");
+							changetitle.setAttribute("value","제목");
+							var changetext = document.createElement("option");
+							changetext.setAttribute("value","내용");
+							var changedate = document.createElement("option");
+							changetext.setAttribute("value","날짜");
+
+							changeobj.appendChild(changetitle);
+							changeobj.appendChild(changetext);
+							changeobj.appendChild(changedate);
+
+							var fixto = document.createElement("text");
+							var applyfix = document.createElement("input");
+							applyfix.setAttribute("type","button");
+							applyfix.setAttribute("onclick","fnapplyfix();");
+
+							function fnapplyfix(){
+								if(changeobj.value == changetitle){
+								diary_title.innerHTML = fixto.value
+								}
+								if(changeobj.value == changetext){
+								diary_text.innerHTML = fixto.value
+								}
+								if(changeobj.value == changedate){
+								diary_date.innerHTML = fixdateto.value
+								}
+							}
+
+						}
+
+
+					var deletebutton = document.createElement("input");
+					deletebutton.setAttribute("type","button");
+					deletebutton.setAttribute("value","삭제");
+					deletebutton.setAttribute("onclick","delete();");
+
+
+					*/
+
+
+					var diary_title = document.createElement("div");
+					diary_title.innerHTML= "제목 : " + diarytitle
+
+
+					var diary_text = document.createElement("div");
+					diary_text.innerHTML = "내용 : " + diarytext
+
+					var diary_date = document.createElement("div");
+					diary_date.innerHTML = "날짜 : " + diarydate
+
+					var diary_tag = document.createElement("div");
+					diary_tag.innerHTML = "해시태그 : " 
+					diary_tag.style.fontStyle = "bold";
+
+					diary_post.setAttribute("id","diary"+num);
+					
+					diary_post.setAttribute("class","pastdiary");
+					
+					for(i=0;i<count;i++){
+						diary_post.setAttribute("tag"+(i+1),document.getElementById("tag_"+(i+1)).value);
+						diary_tag.innerHTML += document.getElementById("tag_"+(i+1)).value + " ";
+
+					}
+
+					writtendiary.appendChild(diary_post);
+
+					diary_post.appendChild(diary_title);
+					diary_post.appendChild(diary_text);
+					diary_post.appendChild(diary_date);
+					diary_post.appendChild(diary_tag);
+					//diary_post.appendChild(fix_or_delete);
+					
+					
+					if(num!=0){
+						var temp = document.getElementById("diary"+(num-1));
+						writtendiary.insertBefore(diary_post,temp);
+											}
+					num++;
+					
+				}
+			});
+			function printObj(obj) {
+				var ret = "";
+				if($.type(obj)=="string"){
+					ret=obj;
+				}
+				else{
+					for(var property in obj){
+						
+						ret +=printObj(obj[property]);
+
+					}
+				}
+				return ret;
+
+			}
+		}
+
+		
+		
+	</script>
+	<script src = "https://code.jquery.com/jquery-3.2.1.min.js">
+
+		if($(".pastdiary").attr("tag_"+count)==search){
+
+		}
+	</script>
+</html>
